@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:MYAPP/Screen/specification_detail.dart';
-import 'package:MYAPP/constants.dart';
-import 'package:MYAPP/models/Avion_mode.dart';
-
-import 'adult_scooters.dart';
-
-class ScooterHomePage extends StatefulWidget {
-  const ScooterHomePage({
-    super.key,
-  });
+import 'package:myapp/screen/specification_detail.dart';
+import 'package:myapp/constants.dart';
+import 'package:myapp/models/Avion_mode.dart'; // Asegúrate que este es tu modelo de avión
+import 'package:myapp/screen/aviones_list.dart';
+class AvionHomePage extends StatefulWidget {
+  const AvionHomePage({super.key});
 
   @override
-  _ScooterHomePageState createState() => _ScooterHomePageState();
+  _AvionHomePageState createState() => _AvionHomePageState();
 }
 
-class _ScooterHomePageState extends State<ScooterHomePage> {
+class _AvionHomePageState extends State<AvionHomePage> {
   late bool isShow;
   double mainHeight = 773;
   double height = 90;
+
   @override
   void initState() {
     isShow = true;
@@ -31,10 +27,10 @@ class _ScooterHomePageState extends State<ScooterHomePage> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
               primaryColor,
               secondaryColor,
               secondaryColor,
@@ -43,14 +39,13 @@ class _ScooterHomePageState extends State<ScooterHomePage> {
               secondaryColor,
               secondaryColor,
               secondaryColor,
-            ])),
+            ],
+          ),
+        ),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                height: 70,
-                color: primaryColor,
-              ),
+              Container(height: 70, color: primaryColor),
               AnimatedContainer(
                 height: mainHeight,
                 duration: const Duration(microseconds: 300),
@@ -58,38 +53,38 @@ class _ScooterHomePageState extends State<ScooterHomePage> {
                   decoration: BoxDecoration(
                     color: primaryColor,
                     borderRadius: const BorderRadius.only(
-                        bottomRight: Radius.circular(40),
-                        bottomLeft: Radius.circular(40)),
+                      bottomRight: Radius.circular(40),
+                      bottomLeft: Radius.circular(40)),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       if (isShow)
-                        // for menu items, image display and more
-                        AdultScooters(size: size),
-                      // for name price and description
+                        // Reemplazar AdultScooters con componente de aviones
+                        AvionesList(size: size),
+                      
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 25),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
-                              "Oxelo Town 9",
+                              "Boeing 737", // Cambiado a modelo de avión
                               style: TextStyle(
                                 fontWeight: FontWeight.w900,
                                 fontSize: 40,
                               ),
                             ),
                             Text(
-                              "£120,99",
+                              "\$250,000", // Precio ajustado
                               style: TextStyle(
-                                  fontWeight: FontWeight.w800,
-                                  fontSize: 25,
-                                  color: secondaryColor),
+                                fontWeight: FontWeight.w800,
+                                fontSize: 25,
+                                color: secondaryColor),
                             ),
                             const Text(
-                              "Easy Fold Adult Scooter will transform the wav vou commute...",
+                              "Avión comercial de pasillo único con capacidad para 150-200 pasajeros...",
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 20,
@@ -111,14 +106,12 @@ class _ScooterHomePageState extends State<ScooterHomePage> {
                     if (isShow)
                       Container(
                         margin: const EdgeInsets.symmetric(
-                          vertical: 20,
-                          horizontal: 30,
-                        ),
+                          vertical: 20, horizontal: 30),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const Text(
-                              "Show Details",
+                              "Mostrar Detalles",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w900,
@@ -127,10 +120,11 @@ class _ScooterHomePageState extends State<ScooterHomePage> {
                             ),
                             InkWell(
                               onTap: () {
-                                isShow = false;
-                                mainHeight = 213;
-                                height = 650;
-                                setState(() {});
+                                setState(() {
+                                  isShow = false;
+                                  mainHeight = 213;
+                                  height = 650;
+                                });
                               },
                               child: Container(
                                 height: 50,
@@ -149,25 +143,20 @@ class _ScooterHomePageState extends State<ScooterHomePage> {
                         ),
                       ),
                     if (!isShow)
-                      (Container(
+                      Container(
                         color: secondaryColor,
                         child: Container(
                           margin: const EdgeInsets.only(
-                            top: 40,
-                            bottom: 20,
-                            left: 20,
-                          ),
+                            top: 40, bottom: 20, left: 20),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Padding(
                                     padding: EdgeInsets.only(left: 10),
                                     child: Text(
-                                      "Key Features",
+                                      "Características Principales",
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20,
@@ -182,7 +171,7 @@ class _ScooterHomePageState extends State<ScooterHomePage> {
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
                                   children: [
-                                    for (Scooter scooter in listScooter)
+                                    for (Avion avion in listAvion) // Cambiado a listAvion
                                       SizedBox(
                                         height: size.height * 0.23,
                                         width: size.width * 0.39,
@@ -197,7 +186,7 @@ class _ScooterHomePageState extends State<ScooterHomePage> {
                                           child: Stack(
                                             children: [
                                               Image.asset(
-                                                scooter.imageUrl,
+                                                avion.imageUrl, // Imagen de avión
                                                 height: size.height * 0.2,
                                                 width: size.width * 0.35,
                                                 fit: BoxFit.cover,
@@ -213,7 +202,7 @@ class _ScooterHomePageState extends State<ScooterHomePage> {
                                                   ),
                                                   child: Center(
                                                     child: Text(
-                                                      scooter.name,
+                                                      avion.modelo, // Nombre del modelo
                                                       style: const TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -235,7 +224,7 @@ class _ScooterHomePageState extends State<ScooterHomePage> {
                               const Padding(
                                 padding: EdgeInsets.only(left: 5),
                                 child: Text(
-                                  "Specifications Rate",
+                                  "Especificaciones Técnicas",
                                   style: TextStyle(
                                     fontWeight: FontWeight.w900,
                                     color: Colors.white,
@@ -244,8 +233,7 @@ class _ScooterHomePageState extends State<ScooterHomePage> {
                                 ),
                               ),
                               const SizedBox(height: 20),
-                              // for wheel weight and speed,
-                              const SpecificationDetail(),
+                              const SpecificationDetail(), // Asegurar que este componente también esté adaptado
                               const SizedBox(height: 10),
                               Padding(
                                 padding: const EdgeInsets.only(
@@ -263,7 +251,7 @@ class _ScooterHomePageState extends State<ScooterHomePage> {
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         const Text(
-                                          "Buy Now",
+                                          "Reservar Ahora", // Cambiado de "Buy Now"
                                           style: TextStyle(
                                             fontWeight: FontWeight.w900,
                                             fontSize: 22,
@@ -278,7 +266,7 @@ class _ScooterHomePageState extends State<ScooterHomePage> {
                                             borderRadius:
                                                 BorderRadius.circular(20),
                                           ),
-                                          child: const Icon(Icons.arrow_forward,)
+                                          child: const Icon(Icons.arrow_forward)
                                         ),
                                       ],
                                     ),
@@ -288,7 +276,7 @@ class _ScooterHomePageState extends State<ScooterHomePage> {
                             ],
                           ),
                         ),
-                      ))
+                      )
                   ],
                 ),
               )
